@@ -22,3 +22,102 @@ void loop() {
 
   delay(500);  // Update twice per second
 }
+
+
+
+
+// Main code
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+// ================= SETTINGS (FOR YOUR SENSOR) =================
+const int PIN_SOIL = A0;   // Your moisture sensor is connected here
+const int PIN_PUMP = 9;    // PWM wire from MOSFET goes here
+
+// Calibration: These numbers depend on your specific sensor!
+// If readings look incorrect, swap the values or adjust them.
+const int VAL_AIR   = 970; // Sensor reading when completely dry (in air)
+const int VAL_WATER = 570; // Sensor reading when in water
+
+// Pump control thresholds (in percent)
+const int START_LEVEL = 30; // If below 30% -> TURN PUMP ON
+const int STOP_LEVEL  = 70; // If above 70% -> TURN PUMP OFF
+// ==============================================================
+
+bool isPumping = false; // Variable to store pump state
+
+// LCD settings (address usually 0x27, if it doesn't work try 0x3F)
+LiquidCrystal_I2C lcd(0x27, 16, 2); 
+
+void setup() {
+  // Configure pins
+  pinMode(PIN_PUMP, OUTPUT);
+  pinMode(PIN_SOIL, INPUT);
+
+  // Initialize LCD display
+  lcd.init();
+  lcd.backlight();
+
+  // Startup splash screen
+  lcd.setCursor(2, 0);
+  lcd.print("AUTO WATERING");
+  lcd.setCursor(4, 1);
+  lcd.print("SYSTEM");
+  delay(2000);
+  lcd.clear();
+}
+
+void loop() {
+  // 1. Read sensor value
+  int raw = analogRead(PIN_SOIL);
+
+  // 2. Convert raw value to percentage (0% - 100%)
+  int percent = map(raw, VAL_AIR, VAL_WATER, 0, 100);
+  percent = constrain(percent, 0, 100); // Prevent going out of range
+
+  // 3. Control logic (hysteresis)
+  if (percent < START_LEVEL) {
+    isPumping = true; // Too dry, start watering
+  } 
+  else if (percent > STOP_LEVEL) {
+    isPumping = false; // Moisture is sufficient, stop
+  }
+
+  // 4. Pump control
+  if (isPumping) {
+    digitalWrite(PIN_PUMP, HIGH); // Turn pump ON through MOSFET
+  } else {
+    digitalWrite(PIN_PUMP, LOW);  // Turn pump OFF
+  }
+
+  // 5. Display information on the screen
+  
+  // Line 1: Current status
+  lcd.setCursor(0, 0);
+  if (isPumping) {
+    lcd.print("[!] PUMP ON...  "); 
+  } else {
+    // If pump is off, show soil condition
+    if (percent > 80) {
+      lcd.print("Very Wet (OK)   ");
+    } else if (percent > 40) {
+      lcd.print("Soil is Good    ");
+    } else {
+      lcd.print("Getting Dry...  ");
+    }
+  }
+
+  // Line 2: Moisture percentage and label
+  lcd.setCursor(0, 1);
+  lcd.print("Level: ");
+  lcd.print(percent);
+  lcd.print("% ");
+  
+  // Simple text indication based on moisture levels
+  if(percent < 30) lcd.print("LOW ");
+  else if(percent < 70) lcd.print("MID ");
+  else lcd.print("HIGH");
+
+  delay(1000); // Update every second
+}
+
