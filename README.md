@@ -112,7 +112,7 @@ Ensure the submersible pump is fully submerged.
 
 Step 2 — Check All Connections
 
-Moisture sensor should be firmly inserted into the soil in Bottle 2.
+Moisture sensor should be firmly inserted into the soil.
 
 Silicone tube should run from the pump outlet into the soil container.
 
@@ -145,7 +145,7 @@ Water flows through the silicone tube into the soil
 
 The pump automatically stops once sufficient moisture is detected.
 
-You do not need to manually switch the pump—it is fully automated.
+You do not need to manually switch the pump, it is fully automated.
 
 4. User Tips
 
@@ -159,7 +159,7 @@ Water more often → use a higher threshold
 
 💧 Keep the Reservoir Filled
 
-Check the water bottle regularly.
+Check the water reservouir regularly.
 
 Running the pump dry may damage it.
 
