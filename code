@@ -1,0 +1,24 @@
+// === MOISTURE SENSOR CALIBRATION ===
+// This program prints raw sensor values (0–1023)
+// so you can find the DRY and WET calibration points.
+
+const int PIN_SOIL = A0;  // Sensor signal pin
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(PIN_SOIL, INPUT);
+
+  Serial.println("=== MOISTURE SENSOR CALIBRATION ===");
+  Serial.println("1) Keep the sensor in AIR (DRY) → record the value");
+  Serial.println("2) Put the sensor in WATER or WET SOIL → record the value");
+  Serial.println("--------------------------------------");
+}
+
+void loop() {
+  int raw = analogRead(PIN_SOIL);
+
+  Serial.print("Raw value: ");
+  Serial.println(raw);
+
+  delay(500);  // Update twice per second
+}
