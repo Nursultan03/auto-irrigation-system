@@ -2,6 +2,13 @@
 
 This project is an automated irrigation system designed for home gardening. The system uses soil moisture sensors, an Arduino, and a submersible water pump to automatically water plants when soil moisture drops below a certain point (30% in our case).
 
+Done by: 
+
+Tagaibek Kubatov
+
+Aibek Osmonbaev
+
+Nursultan Zhaparov
 
 # Features:
 
@@ -87,6 +94,8 @@ GND EVERYTHING Common Ground for all parts
 
 
 # Usage Instructions
+
+Video demonstration: https://drive.google.com/file/d/1BBCtS70DtyuWDRChrOhKbgmHSf-FeWmO/view?usp=sharing
 
 1. System Overview
 
