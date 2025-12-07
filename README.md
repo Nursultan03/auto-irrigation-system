@@ -17,7 +17,7 @@ I2C LCD display
 
 -----------------------------------------------------
 
-# Hardware Used
+# Hardware Used:
 
 Arduino Uno
 
