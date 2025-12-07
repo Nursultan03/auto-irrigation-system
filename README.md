@@ -52,14 +52,21 @@ Pump Power: Powered by separate 6V batteries (or power supply).
   This prevents the screen from glitching when the pump stops.
 
 3. 👀 Red Sensor (Moisture Level)The sensor that dictates the logic "Dry -> Water".
+
    VCC (+): Connect to Arduino 5V.
+
    GND (-): Connect to Arduino GND.
+
    S (Signal): Connect to Arduino Pin A0.
 
 5. 📺 LCD Screen (1602 + I2C)To see the percentage and status.
+
    GND: Connect to Arduino GND.
+
    VCC: Connect to Arduino 5V.
+
    SDA: Connect to Arduino Pin A4.
+
    SCL: Connect to Arduino Pin A5.
   
 📋 Final Pin Summary TableArduino Pin Connected To FunctionD9 MOSFET (SIG) Controls the PumpA0 Red Sensor (S) Reads Soil MoistureA4 LCD Screen (SDA) Display DataA5 LCD Screen (SCL) Display Clock5V Sensor & Screen Power for low-voltage partsGND EVERYTHING Common Ground for all parts
