@@ -85,3 +85,124 @@ GND EVERYTHING Common Ground for all parts
 
 ![telegram-cloud-photo-size-2-5310186544624766616-w](https://github.com/user-attachments/assets/4e1c6712-381f-41dd-8cae-0fe0e7bd04de)
 
+
+# Usage Instructions
+
+1. System Overview
+
+System consists of:
+
+– Water reservoir with a submersible pump inside
+
+– Soil container with a moisture sensor inserted
+
+Arduino + MOSFET – Controls and powers the system
+
+Silicone tubing – Carries water from the pump to the soil
+
+When the soil becomes dry, the moisture sensor detects it and signals the Arduino, which turns on the pump and waters the soil automatically.
+
+2. Before First Use
+
+Step 1 — Fill the Water Reservoir
+
+Open reservoir and fill it with clean water.
+
+Ensure the submersible pump is fully submerged.
+
+Step 2 — Check All Connections
+
+Moisture sensor should be firmly inserted into the soil in Bottle 2.
+
+Silicone tube should run from the pump outlet into the soil container.
+
+All wires should be securely connected to the Arduino and breadboard:
+
+Pump power via transistor/relay module
+
+Moisture sensor signal line to analog input
+
+(Your circuit diagram may vary—follow what you built.)
+
+Step 3 — Power the System
+
+Connect the Arduino via USB and an external power supply for the pump (recommended 5V–9V).
+
+3. How to Use the System
+
+Normal Operation
+
+Insert moisture sensor into the soil.
+
+Power the Arduino.
+
+The system continuously reads soil moisture.
+
+When moisture drops below your programmed threshold:
+
+Arduino turns ON the pump
+
+Water flows through the silicone tube into the soil
+
+The pump automatically stops once sufficient moisture is detected.
+
+You do not need to manually switch the pump—it is fully automated.
+
+4. User Tips
+
+🌱 Adjusting Watering Sensitivity
+
+Change the moisture threshold in your Arduino code to:
+
+Water less often → use a lower threshold
+
+Water more often → use a higher threshold
+
+💧 Keep the Reservoir Filled
+
+Check the water bottle regularly.
+
+Running the pump dry may damage it.
+
+🔌 Ensure Safe Power Use
+
+Use a proper relay or transistor driver for the pump.
+
+Avoid powering the pump directly from the Arduino’s 5V pin.
+
+🧼 Maintenance
+
+Clean the moisture sensor periodically to prevent corrosion.
+
+Ensure the tube is not clogged.
+
+Replace pump or sensor if performance changes.
+
+5. Troubleshooting
+
+❌ Soil stays dry
+
+Check pump wiring
+
+Ensure pump is submerged
+
+Make sure moisture threshold is set correctly
+
+Verify the moisture sensor is inserted firmly into the soil
+
+❌ Pump runs continuously
+
+Moisture sensor may not be reading correctly
+
+Soil might be too loose around the sensor
+
+Check the sensor’s wiring and analog value
+
+❌ No water flow
+
+Tube may be kinked
+
+Reservoir may be empty
+
+Pump may be clogged
+
