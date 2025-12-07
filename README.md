@@ -5,30 +5,45 @@ This project is an automated irrigation system designed for home gardening. The 
 
 # Features:
 
-Automatic watering based on soil moisture
+• Automatic watering based on soil moisture
 
-Real-time monitoring using soil moisture sensor
+• Real-time monitoring using soil moisture sensor
 
-Wi-Fi module for controlling the system through the app
-
-I2C LCD display
+• I2C LCD display
 
 
 
 # Hardware Used:
 
-Arduino Uno
+• Arduino Uno
 
-Wi-Fi module
+• Soil moisture sensor
 
-Soil moisture sensor
+• MOSFET
 
-MOSFET
+• Relay module
 
-Relay module
+• Water pump
 
-Water pump
+• Jumper wires
 
-Jumper wires
+• Tubing + Reservoir
 
-Tubing + Reservoir
+# Setup:
+
+1. 🧠 Power FoundationCommon Ground is key: The Arduino GND must be connected to the MOSFET/Battery GND.
+
+Arduino Power: Powered via USB (or its own power source).
+
+Pump Power: Powered by separate 6V batteries (or power supply).
+
+2. 💪 Pump and MOSFET (The Muscle)This is where the "Brain" controls the "Power.
+
+"MOSFET Wiring (LR7843 / D4184 Module):Thick Wires (Power Input):+ (Vin): Connect to Battery Positive (+) (6V).- (GND): Connect to Battery Negative (-).Thick Wires (Pump Output):OUT +: Connect to the Pump's Red wire.OUT -: Connect to the Pump's Black wire.Thin Wires (Control from Arduino):PWM / SIG (Yellow): Connect to Arduino Pin D9.GND (Black): Connect to Arduino GND.⚡ PROTECTION (Flyback Diode):The diode is screwed/soldered directly to the Pump's contacts (parallel).Side WITH the Stripe (Ring): Connect to Pump Positive (+).Side WITHOUT the Stripe: Connect to Pump Negative (-).This prevents the screen from glitching when the pump stops.
+
+3. 👀 Red Sensor (Moisture Level)The sensor that dictates the logic "Dry -> Water".VCC (+): Connect to Arduino 5V.GND (-): Connect to Arduino GND.S (Signal): Connect to Arduino Pin A0.
+
+4. 📺 LCD Screen (1602 + I2C)To see the percentage and status.GND: Connect to Arduino GND.VCC: Connect to Arduino 5V.SDA: Connect to Arduino Pin A4.SCL: Connect to Arduino Pin A5.📋 Final Pin Summary TableArduino Pin Connected To FunctionD9 MOSFET (SIG) Controls the PumpA0 Red Sensor (S) Reads Soil MoistureA4 LCD Screen (SDA) Display DataA5 LCD Screen (SCL) Display Clock5V Sensor & Screen Power for low-voltage partsGND EVERYTHING Common Ground for all parts
+
+![telegram-cloud-photo-size-2-5310186544624766616-w](https://github.com/user-attachments/assets/4e1c6712-381f-41dd-8cae-0fe0e7bd04de)
+
