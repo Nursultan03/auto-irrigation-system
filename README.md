@@ -1,6 +1,6 @@
 # Project Description:
 
-This project is an automated irrigation system designed for home gardening. The system uses soil moisture sensors, an Arduino, and a submersible water pump to automatically water plants when soil moisture drops below a certain point (30% in our case).
+This project is an automated irrigation system designed for home gardening. The system uses soil moisture sensors, an Arduino, and a submersible water pump to automatically water plants when soil moisture drops below a certain point (30% in our case). After the watering it sends push notification to your phone via Wi-Fi module.
 
 Done by: 
 
@@ -17,6 +17,8 @@ Nursultan Zhaparov: Software
 • Real-time monitoring using soil moisture sensor
 
 • I2C LCD display
+
+• Telegram push notifications to your phone
 
 
 
@@ -35,6 +37,9 @@ Nursultan Zhaparov: Software
 • Jumper wires
 
 • Tubing + Reservoir
+
+• ESP8266 Wi-Fi module
+
 
 # Setup:
 
@@ -75,7 +80,18 @@ Pump Power: Powered by separate 6V batteries (or power supply).
    SDA: Connect to Arduino Pin A4.
 
    SCL: Connect to Arduino Pin A5.
+
+6. ESP8266
+
+A0 → Moisture sensor analog output
+
+D1 (or any pin) → Relay IN
+
+VIN → Pump supply (if using external 5V)
+
+GND → Common ground with pump supply
   
+
 📋 Final Pin Summary Table
 
 Arduino Pin Connected To D9 
@@ -217,7 +233,103 @@ Pump may be clogged
 
 ![telegram-cloud-photo-size-2-5310186544624767129-y](https://github.com/user-attachments/assets/213ddd17-471d-45b1-b860-a6955ad8bd4c)
 
+# Integration of Telegram
 
+🚀 Adding Telegram Notifications to the Automatic Irrigation System
+
+You can integrate Telegram alerts so the system sends you messages when:
+
+Soil becomes too dry
+
+Pump turns on/off
+
+Moisture readings drop below a threshold
+
+Errors or abnormal readings occur
+
+This section explains how to add Telegram messaging using the ESP8266 + UniversalTelegramBot library.
+
+1. Create a Telegram Bot
+Step 1 — Talk to BotFather
+
+Open Telegram
+
+Search for BotFather
+
+Type:
+
+/start
+/newbot
+
+
+Enter a name for your bot
+
+Enter a username (must end in _bot)
+
+BotFather will give you a BOT TOKEN, looks like:
+
+1234567890:ABCdefGhijkLmNoPQRstuVWxyz1234567
+
+
+Save this — you’ll need it in the code.
+
+2. Get Your Chat ID
+Step 1 — Use this link in your browser:
+https://api.telegram.org/bot<YOUR-TOKEN>/getUpdates
+
+
+Example:
+
+https://api.telegram.org/bot1234567890:ABCdefGhijkLmNoPQRstuVWxyz1234567/getUpdates
+
+Step 2 — Send a message to your bot
+
+Open Telegram → search your bot name → press Start → send any message.
+
+Step 3 — Reload the link
+
+You will now see something like:
+
+"chat":{"id":123456789}
+
+
+Your CHAT ID is:
+
+123456789
+
+3. Install Required Libraries in Arduino IDE
+
+Go to Sketch → Include Library → Manage Libraries and install:
+
+ArduinoJson
+
+UniversalTelegramBot
+
+ESP8266WiFi (should already be installed)
+
+4. Add Telegram API Code to ESP8266
+
+Below is a clean, ready-to-use example that integrates with the auto-irrigation code.
+It sends notifications when:
+
+Moisture drops too low
+
+Pump turns ON
+
+Pump turns OFF
+
+5. Suggested Telegram Features to Add
+
+You can easily extend functionality:
+
+✔ Send moisture readings every hour
+✔ Receive alerts when water reservoir is empty
+✔ Change threshold remotely via Telegram commands
+✔ Add /status command to get live moisture data
+✔ Add /pump_on or /pump_off remote control
+✔ Add images/graphs via bot API (optional)
+
+I can generate any of these for you if you want.
 
 # Project Summary:
 
