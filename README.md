@@ -4,11 +4,11 @@ This project is an automated irrigation system designed for home gardening. The 
 
 Done by: 
 
-Tagaibek Kubatov
+Tagaibek Kubatov:  Mechanical assembler
 
-Aibek Osmonbaev
+Aibek Osmonbaev: Hardware integration
 
-Nursultan Zhaparov
+Nursultan Zhaparov: Software
 
 # Features:
 
