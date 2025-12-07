@@ -122,7 +122,6 @@ Pump power via transistor/relay module
 
 Moisture sensor signal line to analog input
 
-(Your circuit diagram may vary—follow what you built.)
 
 Step 3 — Power the System
 
