@@ -69,7 +69,19 @@ Pump Power: Powered by separate 6V batteries (or power supply).
 
    SCL: Connect to Arduino Pin A5.
   
-📋 Final Pin Summary TableArduino Pin Connected To FunctionD9 MOSFET (SIG) Controls the PumpA0 Red Sensor (S) Reads Soil MoistureA4 LCD Screen (SDA) Display DataA5 LCD Screen (SCL) Display Clock5V Sensor & Screen Power for low-voltage partsGND EVERYTHING Common Ground for all parts
+📋 Final Pin Summary Table
+
+Arduino Pin Connected To D9 
+
+MOSFET (SIG) Controls the Pump
+
+A0 Red Sensor (S) Reads Soil Moisture
+
+A4 LCD Screen (SDA) Display Data
+
+5V Sensor & Screen Power for low-voltage parts
+
+GND EVERYTHING Common Ground for all parts
 
 ![telegram-cloud-photo-size-2-5310186544624766616-w](https://github.com/user-attachments/assets/4e1c6712-381f-41dd-8cae-0fe0e7bd04de)
 
