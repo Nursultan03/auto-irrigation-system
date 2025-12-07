@@ -1,12 +1,12 @@
 # auto-irrigation-system
 Automated irrigation system using soil moisture sensor, arduino and submersible pump
 
-Project Description
+# Project Description:
 
 This project is an automated irrigation system designed for home gardening. The system uses soil moisture sensors, an Arduino, and a submersible water pump to automatically water plants when soil moisture drops below a certain point (30% in our case).
 -----------------------------------------------------
 
-Features
+# Features:
 
 Automatic watering based on soil moisture
 
@@ -18,7 +18,7 @@ I2C LCD display
 
 -----------------------------------------------------
 
-Hardware Used
+# Hardware Used
 
 Arduino Uno
 
