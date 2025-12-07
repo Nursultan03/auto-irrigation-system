@@ -121,3 +121,129 @@ void loop() {
   delay(1000); // Update every second
 }
 
+// Telegram integration code
+
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+#include <WiFiClientSecure.h>
+#include <UniversalTelegramBot.h>
+
+const char* ssid = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+WiFiClientSecure secured_client;
+UniversalTelegramBot bot("YOUR_TELEGRAM_BOT_TOKEN", secured_client);
+String chatID = "YOUR_CHAT_ID";
+
+ESP8266WebServer server(80);
+
+// Pins
+const int MOISTURE_PIN = A0;
+const int PUMP_PIN = D1;
+
+int THRESHOLD = 600;
+bool pumpState = false;
+bool autoMode = true;
+
+unsigned long lastBotCheck = 0;
+unsigned long lastMoistureCheck = 0;
+
+// Function to send a message to Telegram
+void sendMessage(String text) {
+  bot.sendMessage(chatID, text, "");
+}
+
+// Simple HTML dashboard
+String htmlPage() {
+  int moisture = analogRead(MOISTURE_PIN);
+  String s = "<html><body>";
+  s += "<h2>Irrigation Dashboard</h2>";
+  s += "<p>Moisture: " + String(moisture) + "</p>";
+  s += "<p>Pump: " + String(pumpState ? "ON" : "OFF") + "</p>";
+  s += "<a href='/pump/on'>Pump ON</a><br>";
+  s += "<a href='/pump/off'>Pump OFF</a><br>";
+  s += "<a href='/auto'>Auto Mode</a> | ";
+  s += "<a href='/manual'>Manual Mode</a>";
+  s += "</body></html>";
+  return s;
+}
+
+void handleRoot() { server.send(200, "text/html", htmlPage()); }
+
+void handlePumpOn() {
+  digitalWrite(PUMP_PIN, HIGH);
+  pumpState = true;
+  sendMessage("🚰 Pump was turned ON");
+  server.sendHeader("Location", "/");
+  server.send(302, "text/plain", "");
+}
+
+void handlePumpOff() {
+  digitalWrite(PUMP_PIN, LOW);
+  pumpState = false;
+  sendMessage("🔴 Pump was turned OFF");
+  server.sendHeader("Location", "/");
+  server.send(302, "text/plain", "");
+}
+
+void handleAuto() {
+  autoMode = true;
+  sendMessage("🌿 Auto mode activated");
+  server.sendHeader("Location", "/");
+  server.send(302, "text/plain", "");
+}
+
+void handleManual() {
+  autoMode = false;
+  sendMessage("🛠 Manual mode activated");
+  server.sendHeader("Location", "/");
+  server.send(302, "text/plain", "");
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(PUMP_PIN, OUTPUT);
+  digitalWrite(PUMP_PIN, LOW);
+
+  // Wi-Fi
+  secured_client.setInsecure(); 
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) { delay(500); }
+
+  sendMessage("🌱 Irrigation System Online\nIP: " + WiFi.localIP().toString());
+
+  // Server endpoints
+  server.on("/", handleRoot);
+  server.on("/pump/on", handlePumpOn);
+  server.on("/pump/off", handlePumpOff);
+  server.on("/auto", handleAuto);
+  server.on("/manual", handleManual);
+
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+
+  // Periodic check of moisture
+  if (millis() - lastMoistureCheck > 5000) {
+    lastMoistureCheck = millis();
+
+    int moisture = analogRead(MOISTURE_PIN);
+    Serial.println(moisture);
+
+    // Auto Mode logic with Telegram
+    if (autoMode) {
+      if (moisture > THRESHOLD && !pumpState) {
+        digitalWrite(PUMP_PIN, HIGH);
+        pumpState = true;
+        sendMessage("⚠ Soil is dry (" + String(moisture) + "). Pump ON.");
+      } 
+      else if (moisture <= THRESHOLD && pumpState) {
+        digitalWrite(PUMP_PIN, LOW);
+        pumpState = false;
+        sendMessage("✔ Soil moisture restored. Pump OFF.");
+      }
+    }
+  }
+}
