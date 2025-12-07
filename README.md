@@ -329,7 +329,6 @@ You can easily extend functionality:
 ✔ Add /pump_on or /pump_off remote control
 ✔ Add images/graphs via bot API (optional)
 
-I can generate any of these for you if you want.
 
 ![telegram-cloud-photo-size-2-5310186544624767170-y](https://github.com/user-attachments/assets/01371d4c-5ec2-4948-9ae0-10fe46ab42e8)
 
