@@ -206,3 +206,27 @@ Reservoir may be empty
 
 Pump may be clogged
 
+
+![telegram-cloud-photo-size-2-5310186544624767129-y](https://github.com/user-attachments/assets/213ddd17-471d-45b1-b860-a6955ad8bd4c)
+
+
+
+# Project Summary:
+
+Purpose:
+
+The purpose of this project is to design and build an automatic irrigation system that can water plants without manual intervention. Using an Arduino, a moisture sensor, a submersible pump, and simple household materials, the system monitors soil moisture and activates watering only when needed. The goal is to create a low-cost, efficient solution for maintaining healthy plants, reducing water waste, and automating plant care.
+
+Outcomes:
+
+• Automated Watering: The system successfully detects soil moisture levels and activates the pump automatically when the soil becomes dry.
+
+• Efficient Water Use: By only watering when needed, the system prevents overwatering and conserves water.
+
+• Reliable Operation: The combination of moisture sensor and pump provides consistent and responsive irrigation based on real-time soil conditions.
+
+• Low-Cost Design: Using common components (Arduino, bottles, tubing) results in an affordable and easy-to-build solution.
+
+• Scalable Concept: The design can be expanded to support multiple plants or integrated into larger smart-home systems.
+
+• Educational Value: The project demonstrates core concepts in electronics, sensors, automation, and embedded programming.
